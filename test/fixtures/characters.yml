@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  age: 1
+  height: MyString
+  weight: MyString
+  strength: 1
+  cunning: 1
+  agility: 1
+  charisma: 1
+  endurance: 1
+  description: MyText
+  history: MyText
+
+two:
+  name: MyString
+  age: 1
+  height: MyString
+  weight: MyString
+  strength: 1
+  cunning: 1
+  agility: 1
+  charisma: 1
+  endurance: 1
+  description: MyText
+  history: MyText
