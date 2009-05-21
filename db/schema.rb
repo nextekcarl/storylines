@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090516183806) do
+ActiveRecord::Schema.define(:version => 20090521225123) do
 
   create_table "characters", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20090516183806) do
     t.text     "history"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by",  :default => 1
+    t.integer  "modified_by", :default => 1
   end
 
   create_table "characters_events", :id => false, :force => true do |t|
@@ -42,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20090516183806) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by",  :default => 1
+    t.integer  "modified_by", :default => 1
   end
 
   create_table "experiences", :force => true do |t|
@@ -51,11 +55,24 @@ ActiveRecord::Schema.define(:version => 20090516183806) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by",   :default => 1
+    t.integer  "modified_by",  :default => 1
   end
 
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "created_by",  :default => 1
+    t.integer  "modified_by", :default => 1
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
