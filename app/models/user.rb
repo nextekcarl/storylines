@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     self.password_hash == encrypt_password(pass)
   end
 
+  def to_label
+    "#{self.username}"
+  end
+
+
   private
 
   def prepare_password

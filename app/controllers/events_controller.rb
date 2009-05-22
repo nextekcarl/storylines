@@ -2,7 +2,8 @@ class EventsController < ApplicationController
   before_filter :login_required
 
   active_scaffold :event do |config|
-    config.columns = [:name, :location, :characters, :start_date, :end_date, :description]
+    config.columns = [:name, :location, :characters, :start_date, :end_date, :description, :creator, :modifier, :updated_at]
+    config.columns[:updated_at].label = "Last modified"
     config.columns[:location].label = "Occurred at"
     config.columns[:characters].label = "Cast"
     config.columns[:description].label = "Objective Description"

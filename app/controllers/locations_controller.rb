@@ -2,7 +2,8 @@ class LocationsController < ApplicationController
   before_filter :login_required
 
   active_scaffold :location do |config|
-    config.columns = [:name, :description, :events]
+    config.columns = [:name, :description, :events, :creator, :modifier, :updated_at]
+    config.columns[:updated_at].label = "Last modified"
     config.show.link.inline = false
     config.subform.layout = :vertical
   end

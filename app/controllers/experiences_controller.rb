@@ -3,7 +3,8 @@ class ExperiencesController < ApplicationController
 
   active_scaffold :experience do |config|
     config.label = "Personal experience"
-    config.columns = [:name, :character, :event, :description, :start_date]
+    config.columns = [:name, :character, :event, :description, :start_date, :creator, :modifier, :updated_at]
+    config.columns[:updated_at].label = "Last modified"
     config.update.columns.exclude :start_date
     config.create.columns.exclude :start_date
     config.subform.layout = :vertical

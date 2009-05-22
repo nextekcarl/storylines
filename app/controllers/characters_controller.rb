@@ -3,7 +3,9 @@ class CharactersController < ApplicationController
 
   active_scaffold :character do |config|
     #config.label = "Characters"
-    config.columns = [:name, :age, :height, :weight, :strength, :cunning, :agility, :charisma, :endurance, :description, :history, :experiences, :events]
+    config.columns =[:name, :age, :height, :weight, :strength, :cunning, :agility, :charisma,
+      :endurance, :description, :history, :experiences, :events, :creator, :modifier, :updated_at]
+    config.columns[:updated_at].label = "Last modified"
     config.show.link.inline = false
     config.subform.layout = :vertical
     #config.subform.layout = :vertical

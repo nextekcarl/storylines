@@ -1,5 +1,9 @@
 module CharactersHelper
 
+  def updated_at_column(record)
+    time_ago_in_words(record.updated_at) + " ago"
+  end
+
   def history_show_column(record)
     record.history.to_s
   end
