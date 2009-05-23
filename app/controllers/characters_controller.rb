@@ -7,6 +7,7 @@ class CharactersController < ApplicationController
       :endurance, :description, :history, :experiences, :events, :creator, :modifier, :updated_at]
     config.create.columns.exclude [:creator, :modifier, :updated_at]
     config.subform.columns.exclude [:creator, :modifier, :updated_at]
+    config.update.columns.exclude [:creator, :modifier, :updated_at]
     config.columns[:updated_at].label = "Last modified"
     config.show.link.inline = false
     config.subform.layout = :vertical

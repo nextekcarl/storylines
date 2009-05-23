@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     config.columns = [:name, :location, :characters, :start_date, :end_date, :description, :creator, :modifier, :updated_at]
     config.create.columns.exclude [:creator, :modifier, :updated_at]
     config.subform.columns.exclude [:creator, :modifier, :updated_at]
+    config.update.columns.exclude [:creator, :modifier, :updated_at]
     config.columns[:updated_at].label = "Last modified"
     config.columns[:location].label = "Occurred at"
     config.columns[:characters].label = "Cast"
