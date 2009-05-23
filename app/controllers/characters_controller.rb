@@ -5,6 +5,8 @@ class CharactersController < ApplicationController
     #config.label = "Characters"
     config.columns =[:name, :age, :height, :weight, :strength, :cunning, :agility, :charisma,
       :endurance, :description, :history, :experiences, :events, :creator, :modifier, :updated_at]
+    config.create.columns.exclude [:creator, :modifier, :updated_at]
+    config.subform.columns.exclude [:creator, :modifier, :updated_at]
     config.columns[:updated_at].label = "Last modified"
     config.show.link.inline = false
     config.subform.layout = :vertical
@@ -18,13 +20,9 @@ class CharactersController < ApplicationController
 
   protected
 
-  def before_update_save(record)
-    if record.new_record? then
-      record.created_by = session[:user_id]
-      record.modified_by = session[:user_id]
-    else
-      record.modified_by = session[:user_id]
-    end
+  def before_create_save(record)
+    record.created_by = session[:user_id]
+    record.modified_by = session[:user_id]
   end
 
   def before_update_save(record)

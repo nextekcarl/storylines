@@ -4,6 +4,8 @@ class ExperiencesController < ApplicationController
   active_scaffold :experience do |config|
     config.label = "Personal experience"
     config.columns = [:name, :character, :event, :description, :start_date, :creator, :modifier, :updated_at]
+    config.create.columns.exclude [:creator, :modifier, :updated_at]
+    config.subform.columns.exclude [:creator, :modifier, :updated_at, :start_date]
     config.columns[:updated_at].label = "Last modified"
     config.update.columns.exclude :start_date
     config.create.columns.exclude :start_date
@@ -14,13 +16,9 @@ class ExperiencesController < ApplicationController
 
     protected
 
-  def before_update_save(record)
-    if record.new_record? then
-      record.created_by = session[:user_id]
-      record.modified_by = session[:user_id]
-    else
-      record.modified_by = session[:user_id]
-    end
+  def before_create_save(record)
+    record.created_by = session[:user_id]
+    record.modified_by = session[:user_id]
   end
 
   def before_update_save(record)
