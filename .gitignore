@@ -3,4 +3,3 @@ tmp
 db/*.sqlite3
 db/data.yml
 *.*~
-config/initializers/hoptoad.rb
