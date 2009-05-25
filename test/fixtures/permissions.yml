@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  universe_id: 1
+  user_id: 1
+  rights: 1
+
+two:
+  universe_id: 1
+  user_id: 1
+  rights: 1

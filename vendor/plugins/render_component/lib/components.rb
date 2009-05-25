@@ -12,7 +12,7 @@ module Components
       alias_method_chain :process_cleanup, :render_component
       alias_method_chain :session=, :render_component
       alias_method_chain :flash, :render_component
-      alias_method_chain :assign_shortcuts, :render_component
+      alias_method_chain :perform_action, :render_component
       alias_method_chain :send_response, :render_component
 
       alias_method :component_request?, :parent_controller
@@ -35,6 +35,11 @@ module Components
   end
 
   module InstanceMethods
+    def perform_action_with_render_component
+      perform_action_without_render_component
+      remove_instance_variable(:@_flash) if defined? @_flash
+    end
+
     # Extracts the action_name from the request parameters and performs that action.
     def process_with_components(request, response, method = :perform_action, *arguments) #:nodoc:
       flash.discard if component_request?
@@ -50,7 +55,7 @@ module Components
       # Renders the component specified as the response for the current method
       def render_component(options) #:doc:
         component_logging(options) do
-          render_for_text(component_response(options, true).body, response.headers["Status"])
+          render_for_text(component_response(options, true).body, response.status)
         end
       end
 
@@ -131,12 +136,6 @@ module Components
 
       def process_cleanup_with_render_component
         process_cleanup_without_render_component unless component_request?
-      end
-      
-      def assign_shortcuts_with_render_component(request, response)
-        assign_shortcuts_without_render_component(request, response)
-        flash(:refresh)
-        flash.sweep if @_session && !component_request?
       end
   end
 end

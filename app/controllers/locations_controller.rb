@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_filter :login_required
+  before_filter :permissions_check
 
   active_scaffold :location do |config|
     config.columns = [:name, :description, :events, :creator, :modifier, :updated_at]
@@ -10,12 +11,16 @@ class LocationsController < ApplicationController
     config.show.link.inline = false
     config.subform.layout = :vertical
   end
+  def conditions_for_collection
+    ['locations.universe_id = ?', ["#{session[:universe_id]}"]]
+  end
 
     protected
 
   def before_create_save(record)
     record.created_by = session[:user_id]
     record.modified_by = session[:user_id]
+    record.universe_id = session[:universe_id]
   end
 
   def before_update_save(record)

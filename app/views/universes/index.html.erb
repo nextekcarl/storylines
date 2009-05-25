@@ -1,0 +1,35 @@
+<% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>description</th>
+  </tr>
+  <% @universes.each do |universe|  %>
+    <tr>
+      <td><%= link_to "#{universe.name}", :controller => 'universes', :action => 'show', :id => universe.id %></td>
+      <td><%= universe.description %></td>
+    </tr>
+      <table border="1">
+        <tr>
+          <th>Users with access</th>
+          <th>User Name</th>
+          <th>Permission level</th>
+        </tr>
+        <% universe.permissions.each do |permission|  %>
+          <tr>
+            <td></td>
+            <td><%= permission.user.username %></td>
+            <td><%= permission.rights_in_words %></td>
+            <td><%= link_to "revoke access", :controller => 'permissions',
+                  :action => 'destroy', :id => permission.id %> | <%= link_to "promote/demote",
+                  :controller => 'permissions', :action => 'edit', :id => permission.id %></td>
+          </tr>
+        <% end %>
+        <td><%= link_to "Add new collaborator to this Universe", :controller => 'permissions',
+                  :action => 'new', :universe => universe.id %></td>
+      </table>
+  <% end %>
+
+</table>

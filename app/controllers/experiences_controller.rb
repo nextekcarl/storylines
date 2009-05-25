@@ -1,5 +1,6 @@
 class ExperiencesController < ApplicationController
   before_filter :login_required
+  before_filter :permissions_check
 
   active_scaffold :experience do |config|
     config.label = "Personal experience"
@@ -14,12 +15,16 @@ class ExperiencesController < ApplicationController
     config.columns[:start_date].includes = [:event]
     config.list.sorting = { :start_date => :asc }
   end
+  def conditions_for_collection
+    ['experiences.universe_id = ?', ["#{session[:universe_id]}"]]
+  end
 
     protected
 
   def before_create_save(record)
     record.created_by = session[:user_id]
     record.modified_by = session[:user_id]
+    record.universe_id = session[:universe_id]
   end
 
   def before_update_save(record)

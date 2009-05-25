@@ -1,5 +1,6 @@
 class CharactersController < ApplicationController
   before_filter :login_required
+  before_filter :permissions_check
 
   active_scaffold :character do |config|
     #config.label = "Characters"
@@ -19,11 +20,17 @@ class CharactersController < ApplicationController
     #columns[:phone].description = "(Format: ###-###-####)"
   end
 
+  def conditions_for_collection
+    ['characters.universe_id = ?', ["#{session[:universe_id]}"]]
+  end
+
+
   protected
 
   def before_create_save(record)
     record.created_by = session[:user_id]
     record.modified_by = session[:user_id]
+    record.universe_id = session[:universe_id]
   end
 
   def before_update_save(record)

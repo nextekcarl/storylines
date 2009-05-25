@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_filter :login_required
+  before_filter :permissions_check
 
   active_scaffold :event do |config|
     config.columns = [:name, :location, :characters, :start_date, :end_date, :description, :creator, :modifier, :updated_at]
@@ -17,11 +18,16 @@ class EventsController < ApplicationController
     config.nested.add_link(:experiences, [:experiences], :inline => false)
   end
 
+  def conditions_for_collection
+    ['events.universe_id = ?', ["#{session[:universe_id]}"]]
+  end
+
     protected
 
   def before_create_save(record)
     record.created_by = session[:user_id]
     record.modified_by = session[:user_id]
+    record.universe_id = session[:universe_id]
   end
 
   def before_update_save(record)
