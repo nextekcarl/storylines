@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
   before_filter :login_required
-  before_filter :permissions_check
+  before_filter :universe_set?
+  before_filter :authorized_for_viewing?, :only => [:list, :show]
+  before_filter :authorized_for_creating?, :only => [:new, :create]
+  before_filter :authorized_for_editing?, :only => [:edit, :update, :destroy]
 
   active_scaffold :event do |config|
     config.columns = [:name, :location, :characters, :start_date, :end_date, :description, :creator, :modifier, :updated_at]
@@ -14,7 +17,10 @@ class EventsController < ApplicationController
     #config.show.link.inline = false
     config.subform.layout = :vertical
     config.list.sorting = { :start_date => :asc }
-    config.nested.add_link(:Cast, [:characters], :inline => false)
+    config.show.link.inline = false
+    config.update.link.inline = false
+    config.create.link.inline = false
+    config.delete.link.inline = false
     config.nested.add_link(:experiences, [:experiences], :inline => false)
   end
 

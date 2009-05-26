@@ -1,15 +1,23 @@
 class UniversesController < ApplicationController
   before_filter :login_required
-  before_filter :authorized?, :only => [:update, :destroy]
+  before_filter :authorized?, :only => [:edit, :update, :destroy]
+  before_filter :show_redirect, :only => [:show]
+  after_filter :unset_universe_session_id, :only => [:index]
 
   active_scaffold :universe do |config|
     config.columns = [:creator, :name, :description]
+    config.create.columns.exclude [:creator]
+    config.update.columns.exclude [:creator]
+    config.show.link.inline = false
+    config.update.link.inline = false
+    config.create.link.inline = false
+    config.delete.link.inline = false
   end
 
   protected
 
   def before_create_save(record)
-    record.creator_id = session[:user_id]
+    record.creator_id = current_user.id
   end
 
 # Doesn't work, see authorized? method below for work around.
@@ -22,13 +30,31 @@ class UniversesController < ApplicationController
 #  end
 
   def authorized?
-    #This results in an ugly 500 internal server error and the flash doesn't get
-    #rendered, but it does protect the data properly. Working on a fix.
+    #Only works correctly if not using ajax.
     @universe = Universe.find(params[:id])
-    unless @universe.creator_id == session[:user_id]
-      flash[:notice] = "Only the creator of a Universe may modify it."
-      redirect_to :controller => :universe
+    unless @universe.creator_id == current_user.id
+      flash[:error] = "Only the creator of a Universe may modify it."
+      redirect_to :controller => :universes
       return false
     end
+  end
+
+  def show_redirect
+    #This will redirect the user to start seeing the characters in this particular
+    #Universe, assuming they either created it or have been permitted to see it
+    #by the creator of that Universe.
+    @universe = Universe.find(params[:id])
+    @permission = @universe.permissions.find(:first, :conditions => ["user_id = ? and rights >= 1", current_user.id])
+    if @universe.creator_id == current_user.id or !@permission.nil?
+      session[:universe_id] = @universe.id
+      redirect_to :controller => :characters
+    else
+      flash[:error] = "You are not authorized to view that Universe's contents."
+      redirect_to :controller => :universes
+    end
+  end
+
+  def unset_universe_session_id
+    session[:universe_id] = nil
   end
 end

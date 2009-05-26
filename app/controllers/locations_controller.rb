@@ -1,6 +1,9 @@
 class LocationsController < ApplicationController
   before_filter :login_required
-  before_filter :permissions_check
+  before_filter :universe_set?
+  before_filter :authorized_for_viewing?, :only => [:list, :show]
+  before_filter :authorized_for_creating?, :only => [:new, :create]
+  before_filter :authorized_for_editing?, :only => [:edit, :update, :destroy]
 
   active_scaffold :location do |config|
     config.columns = [:name, :description, :events, :creator, :modifier, :updated_at]

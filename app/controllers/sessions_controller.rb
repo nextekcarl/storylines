@@ -1,11 +1,12 @@
 class SessionsController < ApplicationController
   def new
   end
-  
+
   def create
     user = User.authenticate(params[:login], params[:password])
     if user
       session[:user_id] = user.id
+      session[:universe_id] = nil
       flash[:notice] = "Logged in successfully."
       redirect_to root_url
     else
@@ -13,7 +14,7 @@ class SessionsController < ApplicationController
       render :action => 'new'
     end
   end
-  
+
   def destroy
     session[:user_id] = nil
     flash[:notice] = "You have been logged out."
