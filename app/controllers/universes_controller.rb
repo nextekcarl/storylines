@@ -3,6 +3,7 @@ class UniversesController < ApplicationController
   before_filter :authorized?, :only => [:edit, :update, :destroy]
   before_filter :show_redirect, :only => [:show]
   after_filter :unset_universe_session_id, :only => [:index]
+  before_filter :add_permitted_universes, :only => [:index]
 
   active_scaffold :universe do |config|
     config.columns = [:creator, :name, :description]
@@ -12,6 +13,10 @@ class UniversesController < ApplicationController
     config.update.link.inline = false
     config.create.link.inline = false
     config.delete.link.inline = false
+  end
+
+  def conditions_for_collection
+    ["universes.creator_id = ? or universes.id IN (#{@permitted_universes.join(',')})", ["#{current_user.id}"]]
   end
 
   protected
@@ -56,5 +61,15 @@ class UniversesController < ApplicationController
 
   def unset_universe_session_id
     session[:universe_id] = nil
+  end
+
+  def add_permitted_universes
+    @permitted_universes = Array.new
+    unless current_user.permissions.nil?
+      current_user.permissions.each do |permission|
+        @permitted_universes << permission.universe.id
+      end
+      @permitted_universes unless @permitted_universes.nil?
+    end
   end
 end
