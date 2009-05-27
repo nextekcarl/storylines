@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   has_many :locations_modified, :class_name => "Locations", :foreign_key => :modified_by
   has_many :experiences_created, :class_name => "Experiences", :foreign_key => :created_by
   has_many :experiences_modified, :class_name => "Experiences", :foreign_key => :modified_by
-  has_many :permissions
-  has_many :universes, :through => :permissions
+  has_many :userlimits
+  has_many :universes, :through => :userlimits
   has_many :own_universes, :class_name => "Universe", :foreign_key => :creator_id
 
   # new columns need to be added here to be writable through mass assignment

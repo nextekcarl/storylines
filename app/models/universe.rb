@@ -1,6 +1,6 @@
 class Universe < ActiveRecord::Base
-  has_many :permissions
-  has_many :users, :through => :permissions
+  has_many :userlimits
+  has_many :users, :through => :userlimits
   belongs_to :creator, :class_name => "User", :foreign_key => :creator_id
 
 #  def authorized_for_update?
