@@ -20,7 +20,8 @@ class UniversesController < ApplicationController
     if @permitted_universes.empty?
       ['universes.creator_id = ?', ["#{current_user.id}"]]
     else
-      ['universes.creator_id = ? or universes.id IN (?)', ["#{current_user.id}", "#{@permitted_universes.join(',')}"]]
+      logger.error("#{current_user.id}, #{@permitted_universes.join(',')}")
+      ["universes.creator_id = ? or universes.id IN (#{@permitted_universes.join(',')})", ["#{current_user.id}"]]
     end
   end
 
@@ -74,7 +75,7 @@ class UniversesController < ApplicationController
       current_user.userlimits.each do |userlimit|
         @permitted_universes << userlimit.universe.id
       end
-      @permitted_universes
     end
+    @permitted_universes
   end
 end

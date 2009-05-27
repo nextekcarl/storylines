@@ -7,4 +7,14 @@ class Universe < ActiveRecord::Base
 #    logger.error "current user id = #{current_user.id}, self stats = #{self.to_yaml}"
 #    return false unless current_user.id == self.creator_id
 #  end
+
+  def authorized_for_update?
+    #Greys out the edit link when the user isn't the creator
+    new_record? || current_user.id == self.creator_id
+  end
+
+  def authorized_for_destroy?
+    #Greys out the edit link when the user isn't the creator
+    new_record? || current_user.id == self.creator_id
+  end
 end

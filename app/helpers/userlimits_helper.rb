@@ -13,15 +13,15 @@ module UserlimitsHelper
   def user_form_column(record, input_name)
     @universe = Universe.find(session[:universe_id])
     @permitted_users = Array.new
-    unless @universe.permissions.nil?
-      @universe.permissions.each do |permission|
+    unless @universe.userlimits.nil?
+      @universe.userlimits.each do |permission|
         @permitted_users << permission.user.id
       end
     end
     if @permitted_users.empty?
       @users = User.find(:all, :conditions => ['id != ?', ["#{current_user.id}"]])
     else
-      @users = User.find(:all, :conditions => ['id != ? or NOT IN (?)', ["#{current_user.id}", "#{@permitted_users.join(',')}"]])
+      @users = User.find(:all, :conditions => ["id != ? or NOT IN (#{@permitted_users.join(',')})", ["#{current_user.id}"]])
     end
     collection_select :record, :user_id, @users, :id, :username
   end

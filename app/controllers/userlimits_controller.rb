@@ -6,6 +6,10 @@ class UserlimitsController < ApplicationController
 
   active_scaffold :userlimits do |config|
     config.columns = [:user, :rights]
+    config.show.link.inline = false
+    config.update.link.inline = false
+    config.create.link.inline = false
+    config.delete.link.inline = false
   end
 
   def conditions_for_collection
