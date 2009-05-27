@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     #Universe, assuming they either created it or have been permitted to see it
     #by the creator of that Universe.
     @universe = Universe.find(session[:universe_id])
-    @permission = @universe.permissions.find(:first, :conditions => ["user_id = ? and rights >= ?", current_user.id, rights_requested])
+    @permission = @universe.userlimits.find(:first, :conditions => ["user_id = ? and rights >= ?", current_user.id, rights_requested])
     if @universe.creator_id == current_user.id or !@permission.nil?
       return true
     else
