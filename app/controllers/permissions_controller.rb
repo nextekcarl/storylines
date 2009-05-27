@@ -4,9 +4,9 @@ class PermissionsController < ApplicationController
   before_filter :authorized_for_viewing?, :only => [:list]
   before_filter :authorized?, :only => [:new, :show, :create, :edit, :update, :destroy]
 
-  active_scaffold :permission do |config|
-    config.columns = [:user, :rights]
-  end
+#  active_scaffold :permission do |config|
+#    config.columns = [:user, :rights]
+#  end
 
   def conditions_for_collection
     ['permissions.universe_id = ?', ["#{session[:universe_id]}"]]

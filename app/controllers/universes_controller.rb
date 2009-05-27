@@ -5,15 +5,15 @@ class UniversesController < ApplicationController
   after_filter :unset_universe_session_id, :only => [:index]
   before_filter :add_permitted_universes, :only => [:index]
 
-  active_scaffold :universe do |config|
-    config.columns = [:creator, :name, :description]
-    config.create.columns.exclude [:creator]
-    config.update.columns.exclude [:creator]
-    config.show.link.inline = false
-    config.update.link.inline = false
-    config.create.link.inline = false
-    config.delete.link.inline = false
-  end
+#  active_scaffold :universe do |config|
+#    config.columns = [:creator, :name, :description]
+#    config.create.columns.exclude [:creator]
+#    config.update.columns.exclude [:creator]
+#    config.show.link.inline = false
+#    config.update.link.inline = false
+#    config.create.link.inline = false
+#    config.delete.link.inline = false
+#  end
 
   def conditions_for_collection
     ["universes.creator_id = ? or universes.id IN (#{@permitted_universes.join(',')})", ["#{current_user.id}"]]
