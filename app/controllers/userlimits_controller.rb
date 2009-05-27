@@ -9,7 +9,7 @@ class UserlimitsController < ApplicationController
   end
 
   def conditions_for_collection
-    ['permissions.universe_id = ?', ["#{session[:universe_id]}"]]
+    ['userlimits.universe_id = ?', ["#{session[:universe_id]}"]]
   end
 
   protected
