@@ -21,8 +21,15 @@
      <%= link_to "log in", login_path %>.
 <% end %>
 <br />
-<p>Go to: <%= link_to "Characters", :controller => "characters" %> | <%= link_to "Events", :controller => "events" %>
-| <%= link_to "Locations", :controller => "locations" %> </p>
+<%unless controller.controller_name.titleize == "Universes"  %>
+    <p>Go to:
+    <%= link_to "Back to Universe selection", :controller => "universes" %> |
+    <%= link_to "Characters", :controller => "characters" %> |
+    <%= link_to "Events", :controller => "events" %> |
+    <%= link_to "Locations", :controller => "locations" %> |
+    <%= link_to "Users", :controller => "permissions" %>
+    </p>
+<% end %>
 <%= yield %>
 
 </body>

@@ -29,7 +29,7 @@ class UniversesController < ApplicationController
 #  def before_update_save(record)
 #    unless record.creator_id == session[:user_id]
 #      flash[:notice] = "Only the creator of a Universe may modify it."
-#      redirect_to :controller => :universe
+#      redirect_to :controller => :universe#{@permitted_universes.join(',')}
 #      return false
 #    end
 #  end
@@ -65,7 +65,7 @@ class UniversesController < ApplicationController
 
   def add_permitted_universes
     @permitted_universes = Array.new
-    unless current_user.permissions.nil?
+    unless current_user.permissions.empty?
       current_user.permissions.each do |permission|
         @permitted_universes << permission.universe.id
       end
