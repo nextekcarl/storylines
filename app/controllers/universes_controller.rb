@@ -10,6 +10,7 @@ class UniversesController < ApplicationController
     config.create.columns.exclude [:creator]
     config.update.columns.exclude [:creator]
     config.show.link.inline = false
+    config.show.link.label = "Select"
     config.update.link.inline = false
     config.create.link.inline = false
     config.delete.link.inline = false
