@@ -5,19 +5,19 @@ class ExperiencesController < ApplicationController
   before_filter :authorized_for_creating?, :only => [:new, :create]
   before_filter :authorized_for_editing?, :only => [:edit, :update, :destroy]
 
-#  active_scaffold :experience do |config|
-#    config.label = "Personal experience"
-#    config.columns = [:name, :character, :event, :description, :start_date, :creator, :modifier, :updated_at]
-#    config.create.columns.exclude [:creator, :modifier, :updated_at]
-#    config.subform.columns.exclude [:creator, :modifier, :updated_at, :start_date]
-#    config.update.columns.exclude [:creator, :modifier, :updated_at]
-#    config.columns[:updated_at].label = "Last modified"
-#    config.update.columns.exclude :start_date
-#    config.create.columns.exclude :start_date
-#    config.subform.layout = :vertical
-#    config.columns[:start_date].includes = [:event]
-#    config.list.sorting = { :start_date => :asc }
-#  end
+  active_scaffold :experience do |config|
+    config.label = "Personal experience"
+    config.columns = [:name, :character, :event, :description, :start_date, :creator, :modifier, :updated_at]
+    config.create.columns.exclude [:creator, :modifier, :updated_at]
+    config.subform.columns.exclude [:creator, :modifier, :updated_at, :start_date]
+    config.update.columns.exclude [:creator, :modifier, :updated_at]
+    config.columns[:updated_at].label = "Last modified"
+    config.update.columns.exclude :start_date
+    config.create.columns.exclude :start_date
+    config.subform.layout = :vertical
+    config.columns[:start_date].includes = [:event]
+    config.list.sorting = { :start_date => :asc }
+  end
 
   def conditions_for_collection
     ['experiences.universe_id = ?', ["#{session[:universe_id]}"]]

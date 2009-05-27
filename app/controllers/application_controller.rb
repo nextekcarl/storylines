@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password, :password_confirmation
 
-#  ActiveScaffold.set_defaults do |config|
-#    config.ignore_columns.add [:created_at, :lock_version]
-#    config.show.link.inline = false
-#  end
+  ActiveScaffold.set_defaults do |config|
+    config.ignore_columns.add [:created_at, :lock_version]
+    config.show.link.inline = false
+  end
 
   protected
 

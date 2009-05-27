@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
 
-#  active_scaffold :user do |config|
-#    config.columns = [:username]
-#    config.subform.columns.exclude [:username]
-#  end
+  active_scaffold :user do |config|
+    config.columns = [:username]
+    config.subform.columns.exclude [:username]
+  end
 
   def new
     @user = User.new

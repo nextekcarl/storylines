@@ -1,6 +1,6 @@
-class CreatePermissions < ActiveRecord::Migration
+class CreateUserlimits < ActiveRecord::Migration
   def self.up
-    create_table :permissions do |t|
+    create_table :userlimits do |t|
       t.integer :universe_id
       t.integer :user_id
       t.integer :rights
@@ -10,6 +10,6 @@ class CreatePermissions < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :permissions
+    drop_table :userlimits
   end
 end

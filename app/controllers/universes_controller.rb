@@ -5,15 +5,15 @@ class UniversesController < ApplicationController
   after_filter :unset_universe_session_id, :only => [:index]
   before_filter :add_permitted_universes, :only => [:index]
 
-#  active_scaffold :universe do |config|
-#    config.columns = [:creator, :name, :description]
-#    config.create.columns.exclude [:creator]
-#    config.update.columns.exclude [:creator]
-#    config.show.link.inline = false
-#    config.update.link.inline = false
-#    config.create.link.inline = false
-#    config.delete.link.inline = false
-#  end
+  active_scaffold :universe do |config|
+    config.columns = [:creator, :name, :description]
+    config.create.columns.exclude [:creator]
+    config.update.columns.exclude [:creator]
+    config.show.link.inline = false
+    config.update.link.inline = false
+    config.create.link.inline = false
+    config.delete.link.inline = false
+  end
 
   def conditions_for_collection
     ["universes.creator_id = ? or universes.id IN (#{@permitted_universes.join(',')})", ["#{current_user.id}"]]
@@ -49,7 +49,7 @@ class UniversesController < ApplicationController
     #Universe, assuming they either created it or have been permitted to see it
     #by the creator of that Universe.
     @universe = Universe.find(params[:id])
-    @permission = @universe.permissions.find(:first, :conditions => ["user_id = ? and rights >= 1", current_user.id])
+    @permission = @universe.userlimits.find(:first, :conditions => ["user_id = ? and rights >= 1", current_user.id])
     if @universe.creator_id == current_user.id or !@permission.nil?
       session[:universe_id] = @universe.id
       redirect_to :controller => :characters
@@ -65,9 +65,9 @@ class UniversesController < ApplicationController
 
   def add_permitted_universes
     @permitted_universes = Array.new
-    unless current_user.permissions.empty?
-      current_user.permissions.each do |permission|
-        @permitted_universes << permission.universe.id
+    unless current_user.userlimits.empty?
+      current_user.userlimits.each do |userlimit|
+        @permitted_universes << userlimit.universe.id
       end
       @permitted_universes unless @permitted_universes.nil?
     end
