@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :authorized?, :only => [:edit, :update, :destroy]
+
   active_scaffold :user do |config|
     config.columns = [:username]
     config.subform.columns.exclude [:username]
@@ -17,6 +19,18 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       render :action => 'new'
+    end
+  end
+
+  protected
+
+  def authorized?
+    #Only works correctly if not using ajax, otherwise it generates a 500 error.
+    @user = User.find(params[:id])
+    unless @user.id == current_user.id
+      flash[:error] = "You may only edit your own account."
+      redirect_to :controller => :universes
+      return false
     end
   end
 end
