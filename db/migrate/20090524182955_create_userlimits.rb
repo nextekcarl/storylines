@@ -10,6 +10,6 @@ class CreateUserlimits < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :userlimits
+    drop_table :permissions
   end
 end
