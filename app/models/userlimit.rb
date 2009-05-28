@@ -8,6 +8,10 @@ class Userlimit < ActiveRecord::Base
     return "full edit" if self.rights >= 3
   end
 
+  def to_label
+    "permissions for user:#{self.user.username}"
+  end
+
   def authorized_for_update?
     #Greys out the associated link when the user isn't the creator or authorized
     new_record? || current_user.id == self.universe.creator_id
@@ -21,6 +25,7 @@ class Userlimit < ActiveRecord::Base
   def authorized_for_create?
     #Greys out the associated link when the user isn't the creator or authorized
     #Or at least it is supposed to do that, doesn't work so had to hardwire it.
+    puts "\n\n\n|#{self.universe_id}|\n\n\n"
     true || current_user.id == self.universe.creator_id
   end
 

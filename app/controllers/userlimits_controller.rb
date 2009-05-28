@@ -6,8 +6,10 @@ class UserlimitsController < ApplicationController
 
   active_scaffold :userlimits do |config|
     config.columns = [:user, :rights]
+    config.delete.link.label = "Revoke access"
+    config.actions.exclude :update #Excluded since it doesn't work
     config.show.link.inline = false
-    config.update.link.inline = false
+    #config.update.link.inline = false #Should re-enable if ever figured out
     config.create.link.inline = false
     config.delete.link.inline = false
   end

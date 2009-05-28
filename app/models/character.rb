@@ -26,6 +26,7 @@ class Character < ActiveRecord::Base
 
   def authorized_for_create?
     #Greys out the associated link when the user isn't the creator or authorized
+    puts "\n\n\n|#{self.universe_id}|\n\n\n"
     current_user.id == self.universe.creator_id || current_user.userlimits.find(:first, :conditions => "universe_id = #{self.universe_id}").rights >= 2
   end
 
