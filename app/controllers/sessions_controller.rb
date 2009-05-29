@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    unset_universe_session_id
     session[:user_id] = nil
     flash[:notice] = "You have been logged out."
     redirect_to root_url

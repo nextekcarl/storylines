@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
     #This will redirect the user to start seeing the elements in this particular
     #Universe, assuming they either created it or have been permitted to see it
     #by the creator of that Universe.
-    @universe = Universe.find(session[:universe_id])
+    @universe = current_user.current_universe
     @permission = @universe.userlimits.find(:first, :conditions => ["user_id = ? and rights >= ?", current_user.id, rights_requested])
     if @universe.creator_id == current_user.id or !@permission.nil?
       return true
