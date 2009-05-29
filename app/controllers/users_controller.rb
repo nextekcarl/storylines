@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_filter :login_required
   before_filter :authorized?, :only => [:edit, :update, :destroy]
 
   active_scaffold :user do |config|
@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     else
       render :action => 'new'
     end
+  end
+
+  def conditions_for_collection
+    ['users.id = ?', ["#{current_user.id}"]]
   end
 
   protected
