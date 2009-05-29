@@ -21,7 +21,8 @@
      <%= link_to "log in", login_path %>.
 <% end %>
 <br />
-<%unless controller.controller_name.titleize == "Universes"  %>
+<%unless controller.controller_name.titleize == "Universes" or controller.controller_name.titleize == "Sessions" %>
+    <h3>Current Universe is <%= current_user.current_universe.name %></h3>
     <p>Go to:
     <%= link_to "Back to Universe selection", :controller => "universes" %> |
     <%= link_to "Characters", :controller => "characters" %> |
