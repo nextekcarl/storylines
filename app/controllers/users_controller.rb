@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required, :except => [:new]
   before_filter :authorized?, :only => [:edit, :update, :destroy]
 
   active_scaffold :user do |config|
