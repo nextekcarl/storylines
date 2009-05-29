@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :userlimits
   has_many :universes, :through => :userlimits
   has_many :own_universes, :class_name => "Universe", :foreign_key => :creator_id
+  belongs_to :current_universe, :class_name => "Universe", :foreign_key => :current_universe_id
 
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation

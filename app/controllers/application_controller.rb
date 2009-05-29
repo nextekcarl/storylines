@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def universe_set?
-    logger.info "\n\n\n Universe id set in session as: #{session[:universe_id]}\n\n\n"
-    if session[:universe_id].blank?
+    logger.info "\n\n\n Universe id set in session as: #{current_user.current_universe_id}\n\n\n"
+    if current_user.current_universe_id.nil?
       flash[:notice] = "You must select a Universe first."
       redirect_to '/'
     end
@@ -68,6 +68,7 @@ class ApplicationController < ActionController::Base
   end
 
   def unset_universe_session_id
-    session[:universe_id] = nil
+    current_user.current_universe_id = nil
+    current_user.save
   end
 end

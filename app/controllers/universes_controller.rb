@@ -58,7 +58,8 @@ class UniversesController < ApplicationController
     @universe = Universe.find(params[:id])
     @permission = @universe.userlimits.find(:first, :conditions => ["user_id = ? and rights >= 1", current_user.id])
     if @universe.creator_id == current_user.id or !@permission.nil?
-      session[:universe_id] = @universe.id
+      current_user.current_universe = @universe
+      current_user.save
       redirect_to :controller => :characters
     else
       unset_universe_session_id

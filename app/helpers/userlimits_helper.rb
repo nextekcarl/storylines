@@ -11,7 +11,7 @@ module UserlimitsHelper
   end
 
   def user_form_column(record, input_name)
-    @universe = Universe.find(session[:universe_id])
+    @universe = current_user.current_universe
     @permitted_users = Array.new
     unless @universe.userlimits.nil?
       @universe.userlimits.each do |permission|

@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
   end
 
   def conditions_for_collection
-    ['locations.universe_id = ?', ["#{session[:universe_id]}"]]
+    ['locations.universe_id = ?', ["#{current_user.current_universe_id}"]]
   end
 
     protected
@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
   def before_create_save(record)
     record.created_by = session[:user_id]
     record.modified_by = session[:user_id]
-    record.universe_id = session[:universe_id]
+    record.universe_id = current_user.current_universe_id
   end
 
   def before_update_save(record)

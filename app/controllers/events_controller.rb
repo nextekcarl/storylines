@@ -24,7 +24,7 @@ class EventsController < ApplicationController
   end
 
   def conditions_for_collection
-    ['events.universe_id = ?', ["#{session[:universe_id]}"]]
+    ['events.universe_id = ?', ["#{current_user.current_universe_id}"]]
   end
 
     protected
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def before_create_save(record)
     record.created_by = session[:user_id]
     record.modified_by = session[:user_id]
-    record.universe_id = session[:universe_id]
+    record.universe_id = current_user.current_universe_id
   end
 
   def before_update_save(record)

@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:login], params[:password])
     if user
       session[:user_id] = user.id
-      session[:universe_id] = nil
       flash[:notice] = "Logged in successfully."
       redirect_to root_url
     else
