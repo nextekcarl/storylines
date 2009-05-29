@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def universe_set?
+    logger.info "\n\n\n Universe id set in session as: #{session[:universe_id]}\n\n\n"
     if session[:universe_id].blank?
       flash[:notice] = "You must select a Universe first."
       redirect_to '/'
@@ -27,6 +28,7 @@ class ApplicationController < ActionController::Base
     if authorized(1)
       return true
     else
+      unset_universe_session_id
       flash[:error] = "You are not authorized to view that Universe's contents."
       redirect_to :controller => :universes
     end
@@ -36,6 +38,7 @@ class ApplicationController < ActionController::Base
     if authorized(2)
       return true
     else
+      unset_universe_session_id
       flash[:error] = "You are not authorized to create anything in that Universe."
       redirect_to :controller => :universes
     end
@@ -45,6 +48,7 @@ class ApplicationController < ActionController::Base
     if authorized(3)
       return true
     else
+      unset_universe_session_id
       flash[:error] = "You are not authorized to edit that Universe's contents."
       redirect_to :controller => :universes
     end
@@ -63,18 +67,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-#Very basic check, has been replaced in code, just being kept around as an example
-#  def permissions_check
-#    @okay = false
-#    @user = User.find(session[:user_id])
-#    @universe = Universe.find(session[:universe_id])
-#    (@okay = true) if @user.own_universes.include?(@universe)
-#    (@okay = true) if @user.universes.include?(@universe)
-#    unless @okay
-#      flash[:notice] = "You don't have permission to view that Universe"
-#      logger.error "User ID:#{@user.id} #{@user.username} doesn't have permission to view Universe id #{session[:universe_id]}"
-#      redirect_to '/'
-#      return
-#    end
-#  end
+  def unset_universe_session_id
+    session[:universe_id] = nil
+  end
 end

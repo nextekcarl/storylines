@@ -19,7 +19,9 @@ class Location < ActiveRecord::Base
 
   def authorized_for_create?
     #Greys out the associated link when the user isn't the creator or authorized
-    current_user.id == self.universe.creator_id || current_user.userlimits.find(:first, :conditions => "universe_id = #{self.universe_id}").rights >= 2
+    #Does not work preperly because of the way this method is called by AS.
+    #Looking for a work around.
+    new_record? || current_user.id == self.universe.creator_id || current_user.userlimits.find(:first, :conditions => "universe_id = #{self.universe_id}").rights >= 2
   end
 
   def authorized_for_show?

@@ -44,6 +44,7 @@ class UniversesController < ApplicationController
     #Only works correctly if not using ajax.
     @universe = Universe.find(params[:id])
     unless @universe.creator_id == current_user.id
+      unset_universe_session_id
       flash[:error] = "Only the creator of a Universe may modify it."
       redirect_to :controller => :universes
       return false
@@ -60,13 +61,10 @@ class UniversesController < ApplicationController
       session[:universe_id] = @universe.id
       redirect_to :controller => :characters
     else
+      unset_universe_session_id
       flash[:error] = "You are not authorized to view that Universe's contents."
       redirect_to :controller => :universes
     end
-  end
-
-  def unset_universe_session_id
-    session[:universe_id] = nil
   end
 
   def add_permitted_universes

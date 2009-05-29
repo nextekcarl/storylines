@@ -24,9 +24,10 @@ class Userlimit < ActiveRecord::Base
 
   def authorized_for_create?
     #Greys out the associated link when the user isn't the creator or authorized
-    #Or at least it is supposed to do that, doesn't work so had to hardwire it.
+    #Does not work preperly because of the way this method is called by AS.
+    #Looking for a work around.
     puts "\n\n\n|#{self.universe_id}|\n\n\n"
-    true || current_user.id == self.universe.creator_id
+    new_record? || current_user.id == self.universe.creator_id
   end
 
   def authorized_for_show?
