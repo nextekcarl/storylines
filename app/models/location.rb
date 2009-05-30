@@ -5,7 +5,7 @@ class Location < ActiveRecord::Base
   belongs_to :universe
 
   validates_presence_of :name
-  validates_uniqueness_of :name, :case_sensitive => false
+  validates_uniqueness_of :name, :case_sensitive => false, :scope => :universe_id
 
   def authorized_for_update?
     #Greys out the associated link when the user isn't the creator or authorized

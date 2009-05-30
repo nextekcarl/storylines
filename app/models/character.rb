@@ -6,7 +6,7 @@ class Character < ActiveRecord::Base
   belongs_to :universe
 
   validates_presence_of :name
-  validates_uniqueness_of :name, :case_sensitive => false
+  validates_uniqueness_of :name, :case_sensitive => false, :scope => :universe_id
 
   validates_inclusion_of :strength, :in => 0..10, :message => 'must be between 0 and 10'
   validates_inclusion_of :agility, :in => 0..10, :message => 'must be between 0 and 10'
