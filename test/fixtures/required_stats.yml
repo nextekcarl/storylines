@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  universe_id: 1
+  stat_id: 1
+
+two:
+  universe_id: 1
+  stat_id: 1

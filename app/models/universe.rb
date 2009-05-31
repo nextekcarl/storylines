@@ -3,6 +3,8 @@ class Universe < ActiveRecord::Base
   has_many :users, :through => :userlimits
   belongs_to :creator, :class_name => "User", :foreign_key => :creator_id
   has_many :users, :class_name => "User", :foreign_key => :current_universe_id
+  has_many :required_stats
+  has_many :stats, :through => :required_stats
 
   validates_uniqueness_of :name, :case_sensitive => false
 #  def authorized_for_update?

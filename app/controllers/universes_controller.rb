@@ -6,7 +6,7 @@ class UniversesController < ApplicationController
   before_filter :add_permitted_universes, :only => [:index]
 
   active_scaffold :universe do |config|
-    config.columns = [:creator, :name, :description]
+    config.columns = [:creator, :name, :description, :required_stats]
     config.create.columns.exclude [:creator]
     config.update.columns.exclude [:creator]
     config.show.link.inline = false

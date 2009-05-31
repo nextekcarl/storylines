@@ -4,15 +4,14 @@ class Character < ActiveRecord::Base
   belongs_to :creator, :class_name => "User", :foreign_key => :created_by
   belongs_to :modifier, :class_name => "User", :foreign_key => :modified_by
   belongs_to :universe
+  has_many :my_stats
+  has_many :stats, :through => :my_stats
+  has_many :my_qualities
+  has_many :qualities, :through => :my_stats
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false, :scope => :universe_id
 
-  validates_inclusion_of :strength, :in => 0..10, :message => 'must be between 0 and 10'
-  validates_inclusion_of :agility, :in => 0..10, :message => 'must be between 0 and 10'
-  validates_inclusion_of :cunning, :in => 0..10, :message => 'must be between 0 and 10'
-  validates_inclusion_of :charisma, :in => 0..10, :message => 'must be between 0 and 10'
-  validates_inclusion_of :endurance, :in => 0..10, :message => 'must be between 0 and 10'
 
   def authorized_for_update?
     #Greys out the associated link when the user isn't the creator or authorized

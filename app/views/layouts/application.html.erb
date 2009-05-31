@@ -23,7 +23,8 @@
 <br />
 <%unless controller.controller_name.titleize == "Universes" or
 controller.controller_name.titleize == "Sessions" or
-controller.controller_name.titleize == "Users" %>
+controller.controller_name.titleize == "Users" or
+controller.controller_name.titleize == "Required Stats" %>
     <h3>Current Universe is <%= current_user.current_universe.name %></h3>
     <p>Go to:
     <%= link_to "Back to Universe selection", :controller => "universes" %> |

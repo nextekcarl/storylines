@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  level: 1
+  stat_id: 1
+  character_id: 1
+
+two:
+  level: 1
+  stat_id: 1
+  character_id: 1

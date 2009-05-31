@@ -1,0 +1,2 @@
+module MyQualitiesHelper
+end

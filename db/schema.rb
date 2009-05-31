@@ -9,18 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090529173955) do
+ActiveRecord::Schema.define(:version => 20090530234417) do
 
   create_table "characters", :force => true do |t|
     t.string   "name"
     t.integer  "age"
     t.string   "height"
     t.string   "weight"
-    t.integer  "strength"
-    t.integer  "cunning"
-    t.integer  "agility"
-    t.integer  "charisma"
-    t.integer  "endurance"
     t.text     "description"
     t.text     "history"
     t.datetime "created_at"
@@ -70,6 +65,41 @@ ActiveRecord::Schema.define(:version => 20090529173955) do
     t.integer  "created_by",  :default => 1
     t.integer  "modified_by", :default => 1
     t.integer  "universe_id", :default => 1
+  end
+
+  create_table "my_qualities", :force => true do |t|
+    t.integer  "level"
+    t.integer  "quality_id"
+    t.integer  "character_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "my_stats", :force => true do |t|
+    t.integer  "level"
+    t.integer  "stat_id"
+    t.integer  "character_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "qualities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "required_stats", :force => true do |t|
+    t.integer  "universe_id"
+    t.integer  "stat_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stats", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "universes", :force => true do |t|

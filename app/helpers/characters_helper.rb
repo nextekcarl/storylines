@@ -5,22 +5,27 @@ module CharactersHelper
   end
 
   def history_show_column(record)
-    record.history.to_s
+    textilize(record.history.to_s)
   end
 
   def description_show_column(record)
-    record.description.to_s
+    textilize(record.description)
   end
 
   def description_column(record)
-    truncate(record.description.to_s, 200)
+    textilize(record.description)
   end
 
   def strength_column(record)
-#    g = GChart.bar(:size => "80x20", :orientation =>:horizontal, :data => [[record.strength], [10]])
-#    g.colors = [:green, :red]
-#    image_tag(g.to_url)
      image_tag("stat_#{record.strength}.png")
+  end
+
+  def my_stats_column(record)
+    record.my_stats.collect{|mystat| h(mystat.stat.name) + image_tag("stat_#{mystat.level}.png")}.join('<br/>')
+  end
+
+  def my_qualities_column(record)
+    record.my_qualities.collect{|myq| h(myq.quality.name) + image_tag("stat_#{myq.level}.png")}.join('<br/>')
   end
 
   def cunning_column(record)

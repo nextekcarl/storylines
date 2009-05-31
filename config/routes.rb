@@ -6,6 +6,16 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
 
+  map.resources :required_stats
+
+  map.resources :stats
+
+  map.resources :my_stats
+
+  map.resources :qualities
+
+  map.resources :my_qualities
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
