@@ -15,18 +15,18 @@ class UserlimitsController < ApplicationController
   end
 
   def conditions_for_collection
-    ['userlimits.universe_id = ?', ["#{session[:universe_id]}"]]
+    ['userlimits.universe_id = ?', ["#{current_user.current_universe_id}"]]
   end
 
   protected
   def before_create_save(record)
-    record.universe_id = session[:universe_id]
+    record.universe_id = current_user.current_universe_id
     record.user_id = params[:record][:user_id]
   end
 
   def authorized?
     #Only works correctly if not using ajax.
-    @universe = Universe.find(session[:universe_id])
+    @universe = Universe.find(current_user.current_universe_id)
     unless @universe.creator_id == current_user.id
       flash[:error] = "Only the creator of a Universe may modify permissions."
       redirect_to '/'
