@@ -2,12 +2,12 @@ class User < ActiveRecord::Base
 
   has_many :characters_created, :class_name => "Character", :foreign_key => :created_by
   has_many :characters_modified, :class_name => "Character", :foreign_key => :modified_by
-  has_many :events_created, :class_name => "Events", :foreign_key => :created_by
-  has_many :events_modified, :class_name => "Events", :foreign_key => :modified_by
-  has_many :locations_created, :class_name => "Locations", :foreign_key => :created_by
-  has_many :locations_modified, :class_name => "Locations", :foreign_key => :modified_by
-  has_many :experiences_created, :class_name => "Experiences", :foreign_key => :created_by
-  has_many :experiences_modified, :class_name => "Experiences", :foreign_key => :modified_by
+  has_many :events_created, :class_name => "Event", :foreign_key => :created_by
+  has_many :events_modified, :class_name => "Event", :foreign_key => :modified_by
+  has_many :locations_created, :class_name => "Location", :foreign_key => :created_by
+  has_many :locations_modified, :class_name => "Location", :foreign_key => :modified_by
+  has_many :experiences_created, :class_name => "Experience", :foreign_key => :created_by
+  has_many :experiences_modified, :class_name => "Experience", :foreign_key => :modified_by
   has_many :userlimits
   has_many :universes, :through => :userlimits
   has_many :own_universes, :class_name => "Universe", :foreign_key => :creator_id
