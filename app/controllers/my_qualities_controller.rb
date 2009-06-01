@@ -1,5 +1,5 @@
 class MyQualitiesController < ApplicationController
-  before_filter  :login_required
+  before_filter :login_required
 
 
   active_scaffold :my_qualities do |config|
