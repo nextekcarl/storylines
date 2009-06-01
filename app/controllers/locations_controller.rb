@@ -15,6 +15,7 @@ class LocationsController < ApplicationController
     config.subform.layout = :vertical
   end
 
+
   def conditions_for_collection
     ['locations.universe_id = ?', ["#{current_user.current_universe_id}"]]
   end

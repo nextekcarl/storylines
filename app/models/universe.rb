@@ -7,6 +7,7 @@ class Universe < ActiveRecord::Base
   has_many :stats, :through => :required_stats
   has_many :events
   has_many :locations
+
   has_many :experiences
   has_many :characters
 
