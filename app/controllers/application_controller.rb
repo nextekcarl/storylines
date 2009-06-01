@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   ActiveScaffold.set_defaults do |config|
     config.ignore_columns.add [:created_at, :lock_version]
+    config.list.empty_field_text = '-'
     config.show.link.page = true
     config.create.link.page = true
     config.update.link.page = true
@@ -19,7 +20,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def universe_set?
-    logger.info "\n\n\n Universe id set in session as: #{current_user.current_universe_id}\n\n\n"
     if current_user.current_universe_id.nil?
       flash[:notice] = "You must select a Universe first."
       redirect_to '/'

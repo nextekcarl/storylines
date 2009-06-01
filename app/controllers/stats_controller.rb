@@ -10,5 +10,13 @@ class StatsController < ApplicationController
     config.delete.link.inline = false
   end
 
+  def update
+    flash[:notice] = "Only the admin can edit stat names. This is to prevent stats across Universes from changing."
+    redirect_to root_url
+  end
 
+  def edit
+    flash[:notice] = "Only the admin can edit stat names. This is to prevent stats across Universes from changing."
+    redirect_to root_url
+  end
 end

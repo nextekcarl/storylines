@@ -4,6 +4,7 @@
 <head>
 <%= javascript_include_tag :defaults %>
 <%= active_scaffold_includes %>
+<%= stylesheet_link_tag "base_styles", :media => "all" %>
 
 <title><%= controller.controller_name.titleize %>: <%= controller.action_name %></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,7 +25,8 @@
 <%unless controller.controller_name.titleize == "Universes" or
 controller.controller_name.titleize == "Sessions" or
 controller.controller_name.titleize == "Users" or
-controller.controller_name.titleize == "Required Stats" %>
+controller.controller_name.titleize == "Stats" or
+controller.controller_name.titleize == "Qualities" %>
     <h3>Current Universe is <%= current_user.current_universe.name %></h3>
     <p>Go to:
     <%= link_to "Back to Universe selection", :controller => "universes" %> |

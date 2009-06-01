@@ -10,6 +10,7 @@ class CharactersController < ApplicationController
     config.columns =[:name, :age, :height, :weight, :my_stats, :my_qualities, :description, :history,
     :experiences, :events, :creator, :modifier, :updated_at]
     config.create.columns.exclude [:creator, :modifier, :updated_at]
+    config.list.columns.exclude [:description, :history]
     config.subform.columns.exclude [:creator, :modifier, :updated_at]
     config.update.columns.exclude [:creator, :modifier, :updated_at]
     config.columns[:updated_at].label = "Last modified"

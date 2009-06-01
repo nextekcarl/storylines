@@ -14,10 +14,12 @@ class MyStatsController < ApplicationController
   end
 
   def list
-
+    flash[:error] = "Unauthorized access."
+    redirect_to root_url
   end
 
   def index
-
+    flash[:error] = "Unauthorized access."
+    redirect_to root_url
   end
 end
