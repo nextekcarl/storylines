@@ -9,4 +9,6 @@ class StatsController < ApplicationController
     config.create.link.inline = false
     config.delete.link.inline = false
   end
+
+
 end
