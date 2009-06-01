@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
 
   ActiveScaffold.set_defaults do |config|
     config.ignore_columns.add [:created_at, :lock_version]
-    config.show.link.inline = false
+    config.show.link.page = true
+    config.create.link.page = true
+    config.update.link.page = true
   end
 
   protected
