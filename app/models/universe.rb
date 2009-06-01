@@ -5,6 +5,10 @@ class Universe < ActiveRecord::Base
   has_many :users, :class_name => "User", :foreign_key => :current_universe_id
   has_many :required_stats
   has_many :stats, :through => :required_stats
+  has_many :events
+  has_many :locations
+  has_many :experiences
+  has_many :characters
 
   validates_uniqueness_of :name, :case_sensitive => false
 #  def authorized_for_update?

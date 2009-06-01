@@ -2,8 +2,8 @@ class UniversesController < ApplicationController
   before_filter :login_required
   before_filter :authorized?, :only => [:edit, :update, :destroy]
   before_filter :show_redirect, :only => [:show]
-  after_filter :unset_universe_session_id, :only => [:index]
-  before_filter :add_permitted_universes, :only => [:index]
+  after_filter :unset_universe_session_id, :only => [:index, :list]
+  before_filter :add_permitted_universes, :only => [:index, :list]
 
   active_scaffold :universe do |config|
     config.columns = [:creator, :name, :description, :required_stats]
@@ -30,15 +30,6 @@ class UniversesController < ApplicationController
   def before_create_save(record)
     record.creator_id = current_user.id
   end
-
-# Doesn't work, see authorized? method below for work around.
-#  def before_update_save(record)
-#    unless record.creator_id == session[:user_id]
-#      flash[:notice] = "Only the creator of a Universe may modify it."
-#      redirect_to :controller => :universe#{@permitted_universes.join(',')}
-#      return false
-#    end
-#  end
 
   def authorized?
     #Only works correctly if not using ajax.
