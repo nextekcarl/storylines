@@ -8,10 +8,6 @@ class UserlimitsController < ApplicationController
     config.columns = [:user, :rights]
     config.delete.link.label = "Revoke access"
     config.actions.exclude :update #Excluded since it doesn't work
-    config.show.link.inline = false
-    #config.update.link.inline = false #Should re-enable if ever figured out
-    config.create.link.inline = false
-    config.delete.link.inline = false
   end
 
   def conditions_for_collection
@@ -25,11 +21,10 @@ class UserlimitsController < ApplicationController
   end
 
   def authorized?
-    #Only works correctly if not using ajax.
     @universe = Universe.find(current_user.current_universe_id)
     unless @universe.creator_id == current_user.id
       flash[:error] = "Only the creator of a Universe may modify permissions."
-      redirect_to '/'
+      redirect_to :controller => :universes
       return false
     end
   end

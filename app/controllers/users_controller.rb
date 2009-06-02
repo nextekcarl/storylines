@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Thank you for signing up! You are now logged in."
-      redirect_to root_url
+      redirect_to :controller => :universes
     else
       render :action => 'new'
     end

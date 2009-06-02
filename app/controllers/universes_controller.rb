@@ -3,7 +3,7 @@ class UniversesController < ApplicationController
   before_filter :authorized?, :only => [:edit, :update, :destroy]
   before_filter :show_redirect, :only => [:show]
   after_filter :unset_universe_session_id, :only => [:index, :list]
-  before_filter :add_permitted_universes, :only => [:index, :list]
+  before_filter :add_permitted_universes, :only => [:index, :list, :update_table]
 
   active_scaffold :universe do |config|
     config.columns = [:creator, :name, :description, :required_stats]

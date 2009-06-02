@@ -6,11 +6,8 @@ class RequiredStatsController < ApplicationController
   before_filter :authorized_for_editing?, :only => [:edit, :update, :destroy]
 
   active_scaffold :required_stat do |config|
+    config.label = "Required Stats"
     config.columns = [:stat]
-    config.show.link.inline = false
-    config.update.link.inline = false
-    config.create.link.inline = false
-    config.delete.link.inline = false
   end
 
   def conditions_for_collection

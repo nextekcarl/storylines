@@ -4,19 +4,17 @@ class QualitiesController < ApplicationController
 
   active_scaffold :quality do |config|
     config.columns = [:name]
-    config.show.link.inline = false
-    config.update.link.inline = false
-    config.create.link.inline = false
-    config.delete.link.inline = false
+    config.subform.layout = :vertical
+    list.sorting = {:name => 'ASC'}
   end
 
   def update
     flash[:notice] = "Only the admin can edit quality names. This is to prevent qualities across Universes from changing."
-    redirect_to root_url
+    redirect_to :controller => :universes
   end
 
   def edit
     flash[:notice] = "Only the admin can edit quality names. This is to prevent qualities across Universes from changing."
-    redirect_to root_url
+    redirect_to :controller => :universes
   end
 end
