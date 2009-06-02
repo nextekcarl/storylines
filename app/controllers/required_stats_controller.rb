@@ -6,7 +6,7 @@ class RequiredStatsController < ApplicationController
   before_filter :authorized_for_editing?, :only => [:edit, :update, :destroy]
 
   active_scaffold :required_stat do |config|
-    config.columns = [:stat, :universe]
+    config.columns = [:stat]
     config.show.link.inline = false
     config.update.link.inline = false
     config.create.link.inline = false
@@ -15,5 +15,11 @@ class RequiredStatsController < ApplicationController
 
   def conditions_for_collection
     ['required_stats.universe_id = ?', ["#{current_user.current_universe_id}"]]
+  end
+
+  protected
+
+  def before_create_save(record)
+    record.universe_id = current_user.current_universe_id
   end
 end
