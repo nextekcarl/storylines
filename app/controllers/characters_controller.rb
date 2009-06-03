@@ -5,6 +5,12 @@ class CharactersController < ApplicationController
   before_filter :authorized_for_creating?, :only => [:new, :create]
   before_filter :authorized_for_editing?, :only => [:edit, :update, :destroy]
 
+  uses_tiny_mce :options => {
+                :theme => 'advanced',
+                :theme_advanced_toolbar_location => :top,
+                :width => '400',
+                :height => '300'}
+
   active_scaffold :character do |config|
     #config.label = "Characters"
     config.columns =[:name, :age, :height, :weight, :my_stats, :my_qualities, :description, :history,
@@ -14,6 +20,8 @@ class CharactersController < ApplicationController
     config.subform.columns.exclude [:creator, :modifier, :updated_at]
     config.update.columns.exclude [:creator, :modifier, :updated_at]
     config.columns[:updated_at].label = "Last modified"
+    config.columns[:description].form_ui= :text_editor
+    config.columns[:history].form_ui= :text_editor
     config.show.link.inline = false
     config.update.link.inline = false
     config.create.link.inline = false
@@ -25,6 +33,15 @@ class CharactersController < ApplicationController
     #list.sorting = {:name => 'ASC'}
     #columns[:phone].label = "Phone #"
     #columns[:phone].description = "(Format: ###-###-####)"
+  end
+
+  def new
+    do_new
+    for rstat in current_user.current_universe.required_stats
+      logger.info "stat id = #{rstat.id}"
+      @record.my_stats.build(:stat_id => rstat.stat.id)
+    end
+    respond_to_action(:new)
   end
 
   def conditions_for_collection

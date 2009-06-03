@@ -3,7 +3,6 @@ class MyQuality < ActiveRecord::Base
   belongs_to :quality
 
   validates_presence_of :quality_id, :message => "must have name."
-  validates_associated :character, :quality
 
   def to_label
     self.quality.name

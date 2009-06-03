@@ -5,12 +5,19 @@ class ExperiencesController < ApplicationController
   before_filter :authorized_for_creating?, :only => [:new, :create]
   before_filter :authorized_for_editing?, :only => [:edit, :update, :destroy]
 
+  uses_tiny_mce :options => {
+                :theme => 'advanced',
+                :theme_advanced_toolbar_location => :top,
+                :width => '400',
+                :height => '300'}
+
   active_scaffold :experience do |config|
     config.label = "Personal experience"
     config.columns = [:name, :character, :event, :description, :start_date, :creator, :modifier, :updated_at]
     config.create.columns.exclude [:creator, :modifier, :updated_at]
     config.subform.columns.exclude [:creator, :modifier, :updated_at, :start_date]
     config.update.columns.exclude [:creator, :modifier, :updated_at]
+    config.columns[:description].form_ui= :text_editor
     config.columns[:updated_at].label = "Last modified"
     config.update.columns.exclude :start_date
     config.create.columns.exclude :start_date

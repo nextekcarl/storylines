@@ -5,8 +5,16 @@ class UniversesController < ApplicationController
   after_filter :unset_universe_session_id, :only => [:index, :list]
   before_filter :add_permitted_universes, :only => [:index, :list, :update_table]
 
+  uses_tiny_mce :options => {
+                :theme => 'advanced',
+                :theme_advanced_toolbar_location => :top,
+                :theme_advanced_toolbar_align => :left,
+                :width => '500',
+                :height => '400'}
+
   active_scaffold :universe do |config|
     config.columns = [:creator, :name, :description]
+    config.columns[:description].form_ui= :text_editor
     config.create.columns.exclude [:creator]
     config.update.columns.exclude [:creator]
     config.show.link.inline = false

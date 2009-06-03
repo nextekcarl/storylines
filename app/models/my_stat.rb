@@ -2,7 +2,6 @@ class MyStat < ActiveRecord::Base
   belongs_to :character
   belongs_to :stat
 
-  validates_associated :character, :stat
 
   def to_label
     self.stat.name
