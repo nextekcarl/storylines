@@ -25,16 +25,19 @@
 <br />
 <%unless controller.controller_name.titleize == "Universes" or
 controller.controller_name.titleize == "Sessions" or
-controller.controller_name.titleize == "Users" or
-controller.controller_name.titleize == "Stats" or
-controller.controller_name.titleize == "Qualities" %>
+controller.controller_name.titleize == "Users" %>
     <h3>Current Universe is <%= current_user.current_universe.name %></h3>
     <p>Go to:
     <%= link_to "Back to Universe selection", :controller => "universes" %> |
     <%= link_to "Characters", :controller => "characters" %> |
     <%= link_to "Events", :controller => "events" %> |
     <%= link_to "Locations", :controller => "locations" %> |
-    <%= link_to "Users", :controller => "userlimits" %>
+    <%= link_to "Users", :controller => "userlimits" %> |
+    <%= link_to "Stats", :controller => "stats" %> |
+    <%= link_to "Qualities", :controller => "qualities" %>
+    <% if current_user.id == current_user.current_universe_id %>
+      | <%= link_to "Required Stats", :controller => "required_stats" %>
+    <% end %>
     </p>
 <% end %>
 <%= yield %>

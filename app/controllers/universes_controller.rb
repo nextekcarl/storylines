@@ -6,14 +6,11 @@ class UniversesController < ApplicationController
   before_filter :add_permitted_universes, :only => [:index, :list, :update_table]
 
   active_scaffold :universe do |config|
-    config.columns = [:creator, :name, :description, :required_stats]
+    config.columns = [:creator, :name, :description]
     config.create.columns.exclude [:creator]
     config.update.columns.exclude [:creator]
     config.show.link.inline = false
     config.show.link.label = "Select"
-    config.update.link.inline = false
-    config.create.link.inline = false
-    config.delete.link.inline = false
   end
 
   def conditions_for_collection
