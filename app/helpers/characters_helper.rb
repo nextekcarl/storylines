@@ -4,6 +4,13 @@ module CharactersHelper
     time_ago_in_words(record.updated_at) + " ago"
   end
 
+  def description_show_column(record)
+    record.description.to_s
+  end
+
+  def history_show_column(record)
+    record.description.to_s
+  end
 
   def my_stats_column(record)
     unless record.my_stats.blank?

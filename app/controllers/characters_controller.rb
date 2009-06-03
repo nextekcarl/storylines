@@ -9,23 +9,23 @@ class CharactersController < ApplicationController
                 :theme => 'advanced',
                 :theme_advanced_toolbar_location => :top,
                 :width => '400',
-                :height => '300'}
+                :height => '300',
+                :theme_advanced_statusbar_location => :bottom,
+                :theme_advanced_resizing => true}
 
   active_scaffold :character do |config|
     #config.label = "Characters"
     config.columns =[:name, :age, :height, :weight, :my_stats, :my_qualities, :description, :history,
     :experiences, :events, :creator, :modifier, :updated_at]
-    config.create.columns.exclude [:creator, :modifier, :updated_at]
+    config.create.columns.exclude [:creator, :modifier, :updated_at, :events, :experiences]
     config.list.columns.exclude [:description, :history]
     config.subform.columns.exclude [:creator, :modifier, :updated_at]
-    config.update.columns.exclude [:creator, :modifier, :updated_at]
+    config.update.columns.exclude [:creator, :modifier, :updated_at, :events, :experiences]
+    config.create.columns.exclude [:experiences, :events]
     config.columns[:updated_at].label = "Last modified"
     config.columns[:description].form_ui= :text_editor
     config.columns[:history].form_ui= :text_editor
     config.show.link.inline = false
-    config.update.link.inline = false
-    config.create.link.inline = false
-    config.delete.link.inline = false
     config.subform.layout = :vertical
     #config.subform.layout = :vertical
     #config.nested.add_link(“Events”, [:events])

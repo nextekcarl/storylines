@@ -10,7 +10,9 @@ class UniversesController < ApplicationController
                 :theme_advanced_toolbar_location => :top,
                 :theme_advanced_toolbar_align => :left,
                 :width => '500',
-                :height => '400'}
+                :height => '400',
+                :theme_advanced_statusbar_location => :bottom,
+                :theme_advanced_resizing => true}
 
   active_scaffold :universe do |config|
     config.columns = [:creator, :name, :description]

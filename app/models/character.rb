@@ -4,9 +4,9 @@ class Character < ActiveRecord::Base
   belongs_to :creator, :class_name => "User", :foreign_key => :created_by
   belongs_to :modifier, :class_name => "User", :foreign_key => :modified_by
   belongs_to :universe
-  has_many :my_stats
+  has_many :my_stats, :dependent => :destroy
   has_many :stats, :through => :my_stats
-  has_many :my_qualities
+  has_many :my_qualities, :dependent => :destroy
   has_many :qualities, :through => :my_stats
 
   validates_presence_of :name

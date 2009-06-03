@@ -9,7 +9,9 @@ class ExperiencesController < ApplicationController
                 :theme => 'advanced',
                 :theme_advanced_toolbar_location => :top,
                 :width => '400',
-                :height => '300'}
+                :height => '300',
+                :theme_advanced_statusbar_location => :bottom,
+                :theme_advanced_resizing => true}
 
   active_scaffold :experience do |config|
     config.label = "Personal experience"

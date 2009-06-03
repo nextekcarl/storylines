@@ -9,7 +9,9 @@ class EventsController < ApplicationController
                 :theme => 'advanced',
                 :theme_advanced_toolbar_location => :top,
                 :width => '400',
-                :height => '300'}
+                :height => '300',
+                :theme_advanced_statusbar_location => :bottom,
+                :theme_advanced_resizing => true}
 
   active_scaffold :event do |config|
     config.columns = [:name, :location, :characters, :start_date, :end_date, :description, :creator, :modifier, :updated_at]
@@ -21,12 +23,10 @@ class EventsController < ApplicationController
     config.columns[:location].label = "Occurred at"
     config.columns[:characters].label = "Cast"
     config.columns[:description].label = "Objective Description"
+    config.create.columns.exclude [:characters]
+    config.show.link.inline = false
     config.subform.layout = :vertical
     config.list.sorting = { :start_date => :asc }
-    config.show.link.inline = false
-    config.update.link.inline = false
-    config.create.link.inline = false
-    config.delete.link.inline = false
     config.nested.add_link(:experiences, [:experiences], :inline => false)
   end
 
