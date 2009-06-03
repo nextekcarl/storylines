@@ -9,7 +9,7 @@ module CharactersHelper
   end
 
   def history_show_column(record)
-    record.description.to_s
+    record.history.to_s
   end
 
   def my_stats_column(record)
