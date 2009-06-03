@@ -42,4 +42,4 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-require 'tiny_mce_active_scaffold'
+require File.join(File.dirname(__FILE__), '../lib/tiny_mce_active_scaffold')
