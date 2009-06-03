@@ -4,6 +4,19 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'sessions', :action => 'new'
   map.resources :sessions
 
+  map.resources :users, :active_resource => true
+  map.resources :locations, :active_resource => true
+  map.resources :events, :active_resource => true
+  map.resources :characters, :active_resource => true
+  map.resources :experiences, :active_resource => true
+  map.resources :universes, :active_resource => true
+  map.resources :qualities, :active_resource => true
+  map.resources :stats, :active_resource => true
+  map.resources :my_qualities, :active_resource => true
+  map.resources :my_stats, :active_resource => true
+  map.resources :required_stats, :active_resource => true
+  map.resources :userlimits, :active_resource => true
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

@@ -20,8 +20,10 @@ module UserlimitsHelper
     end
     if @permitted_users.empty?
       @users = User.find(:all, :conditions => ['id != ?', ["#{current_user.id}"]])
+    elsif @permitted_users.size == 1
+      @users = User.find(:all, :conditions => ["id != ? and id != #{@permitted_users[0]}", ["#{current_user.id}" ]])
     else
-      @users = User.find(:all, :conditions => ["id != ? or NOT IN (#{@permitted_users.join(',')})", ["#{current_user.id}"]])
+      @users = User.find(:all, :conditions => ["id != ? and id NOT IN (#{@permitted_users.join(',')})", ["#{current_user.id}"]])
     end
     collection_select :record, :user_id, @users, :id, :username
   end
