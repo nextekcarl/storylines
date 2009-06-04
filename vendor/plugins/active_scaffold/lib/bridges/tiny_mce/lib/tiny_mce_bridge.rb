@@ -2,7 +2,7 @@ module ActiveScaffold
   module Helpers
     module ViewHelpers
       def active_scaffold_includes_with_tiny_mce(frontend = :default)
-        redefine_close = javascript_tag(%|
+        tiny_mce_js = javascript_tag(%|
 var action_link_close = ActiveScaffold.ActionLink.Abstract.prototype.close;
 ActiveScaffold.ActionLink.Abstract.prototype.close = function() {
   this.adapter.select('textarea.mceEditor').each(function(elem) {
@@ -10,8 +10,8 @@ ActiveScaffold.ActionLink.Abstract.prototype.close = function() {
   });
   action_link_close.apply(this);
 };
-        |)  + tiny_mce_init if using_tiny_mce?
-        active_scaffold_includes_without_tiny_mce(frontend) + (redefine_close || '')
+        |) if using_tiny_mce?
+        active_scaffold_includes_without_tiny_mce(frontend) + (include_tiny_mce_if_needed || '') + (tiny_mce_js || '')
       end
       alias_method_chain :active_scaffold_includes, :tiny_mce
     end
