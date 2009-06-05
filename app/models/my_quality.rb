@@ -3,6 +3,7 @@ class MyQuality < ActiveRecord::Base
   belongs_to :quality
 
   validates_presence_of :quality_id, :message => "must have name."
+  validates_inclusion_of :level, :in => 0..10, :message => 'must be between 0 and 10'
 
   def to_label
     self.quality.name

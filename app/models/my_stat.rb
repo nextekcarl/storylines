@@ -2,6 +2,8 @@ class MyStat < ActiveRecord::Base
   belongs_to :character
   belongs_to :stat
 
+  validates_inclusion_of :level, :in => 0..10, :message => 'must be between 0 and 10'
+  validates_presence_of :stat_id, :message => "must have name."
 
   def to_label
     self.stat.name
