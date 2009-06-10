@@ -28,8 +28,8 @@ class OrganizationsController < ApplicationController
                      :specialists, :transportation, :internal_security,
                      :knowledge, :publicity, :public_relations, :intrusion,
                      :slush_funds, :bases, :bureaucracy, :firepower]
-    config.create.columns.exclude [:creator, :modifier, :updated_at, :my_stats]
-    config.update.columns.exclude [:creator, :modifier, :updated_at, :my_stats]
+    config.create.columns.exclude [:creator, :modifier, :updated_at, :my_stats, :members]
+    config.update.columns.exclude [:creator, :modifier, :updated_at, :my_stats, :members]
     config.list.columns.exclude [:mission_statement, :agenda, :manpower,
                      :specialists, :transportation, :internal_security,
                      :knowledge, :publicity, :public_relations, :intrusion,

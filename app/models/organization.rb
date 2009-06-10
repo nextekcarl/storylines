@@ -23,22 +23,20 @@ class Organization < ActiveRecord::Base
   validates_inclusion_of :bureaucracy, :in => 0..10, :message => 'must be between 0 and 10'
 
   def my_stats
-    #Creating a hash so we can build a string for the pretty display of stats.
-    stats = Hash.new
+    #Build a string for the pretty display of stats.
     pretty_stats = "<table>"
-    stats[:manpower]=self.manpower
-    stats[:specialists]=self.specialists
-    stats[:transportation]=self.transportation
-    stats[:internal_security]=self.internal_security
-    stats[:firepower]=self.firepower
-    stats[:knowledge]=self.knowledge
-    stats[:publicity]=self.publicity
-    stats[:public_relations]=self.public_relations
-    stats[:intrusion]=self.intrusion
-    stats[:slush_funds]=self.slush_funds
-    stats[:bases]=self.bases
-    stats[:bureaucracy]=self.bureaucracy
-    stats.each{|name, value| pretty_stats += '<tr><td>' + h(name.to_s.humanize) + '</td><td>' + "<img src=\"images/stat_#{value}.png\"" + "/>" + '</td></tr>'}
+    pretty_stats += '<tr><td>Manpower</td><td>' + "<img src=\"/images/stat_#{self.manpower}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Specialists</td><td>' + "<img src=\"/images/stat_#{self.specialists}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Transportation</td><td>' + "<img src=\"/images/stat_#{self.transportation}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Internal Security</td><td>' + "<img src=\"/images/stat_#{self.internal_security}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Firepower</td><td>' + "<img src=\"/images/stat_#{self.firepower}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Knowledge</td><td>' + "<img src=\"/images/stat_#{self.knowledge}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Publicity</td><td>' + "<img src=\"/images/stat_#{self.publicity}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Public Relations</td><td>' + "<img src=\"/images/stat_#{self.public_relations}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Intrusion</td><td>' + "<img src=\"/images/stat_#{self.intrusion}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Slush Funds</td><td>' + "<img src=\"/images/stat_#{self.slush_funds}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Bases</td><td>' + "<img src=\"/images/stat_#{self.bases}.png\"" + "/>" + '</td></tr>'
+    pretty_stats += '<tr><td>Bureaucracy</td><td>' + "<img src=\"/images/stat_#{self.bureaucracy}.png\"" + "/>" + '</td></tr>'
     pretty_stats += '</table>'
     return pretty_stats
   end
