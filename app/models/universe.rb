@@ -9,6 +9,7 @@ class Universe < ActiveRecord::Base
   has_many :experiences, :dependent => :destroy
   has_many :characters, :dependent => :destroy
   has_many :current_visitors, :class_name => "User", :foreign_key => :current_universe_id, :dependent => :nullify
+  has_many :organizations, :dependent => :destroy
 
   validates_uniqueness_of :name, :case_sensitive => false
 #  def authorized_for_update?

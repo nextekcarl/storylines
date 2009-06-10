@@ -8,6 +8,7 @@ class Character < ActiveRecord::Base
   has_many :stats, :through => :my_stats
   has_many :my_qualities, :dependent => :destroy
   has_many :qualities, :through => :my_stats
+  has_and_belongs_to_many :organizations
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false, :scope => :universe_id

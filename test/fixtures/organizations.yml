@@ -1,0 +1,35 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  parent_id: 1
+  mission_statement: MyText
+  agenda: MyText
+  manpower: 1
+  specialists: 1
+  transportation: 1
+  internal_security: 1
+  knowledge: 1
+  publicity: 1
+  public_relations: 1
+  intrusion: 1
+  slush_funds: 1
+  bases: 1
+  bureaucracy: 1
+
+two:
+  name: MyString
+  parent_id: 1
+  mission_statement: MyText
+  agenda: MyText
+  manpower: 1
+  specialists: 1
+  transportation: 1
+  internal_security: 1
+  knowledge: 1
+  publicity: 1
+  public_relations: 1
+  intrusion: 1
+  slush_funds: 1
+  bases: 1
+  bureaucracy: 1

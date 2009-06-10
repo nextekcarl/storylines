@@ -16,13 +16,13 @@ class CharactersController < ApplicationController
   active_scaffold :character do |config|
     #config.label = "Characters"
     config.columns =[:name, :age, :height, :weight, :my_stats, :my_qualities, :description, :history,
-    :experiences, :events, :creator, :modifier, :updated_at]
+    :experiences, :events, :organizations, :creator, :modifier, :updated_at]
     config.create.columns.exclude [:creator, :modifier, :updated_at, :events, :experiences]
     config.list.columns.exclude [:description, :history]
     config.subform.columns.exclude [:creator, :modifier, :updated_at]
     config.update.columns.exclude [:creator, :modifier, :updated_at, :events, :experiences]
-    config.create.columns.exclude [:experiences, :events]
     config.columns[:updated_at].label = "Last modified"
+    config.columns[:organizations].form_ui= :select
     config.columns[:description].form_ui= :text_editor
     config.columns[:history].form_ui= :text_editor
     config.show.link.inline = false

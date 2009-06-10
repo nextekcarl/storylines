@@ -13,9 +13,9 @@ class LocationsController < ApplicationController
 
   active_scaffold :location do |config|
     config.columns = [:name, :description, :events, :creator, :modifier, :updated_at]
-    config.create.columns.exclude [:creator, :modifier, :updated_at]
-    config.update.columns.exclude [:creator, :modifier, :updated_at]
-    config.subform.columns.exclude [:creator, :modifier, :updated_at]
+    config.create.columns.exclude [:creator, :modifier, :updated_at, :events]
+    config.update.columns.exclude [:creator, :modifier, :updated_at, :events]
+    config.subform.columns.exclude [:creator, :modifier, :updated_at, :description]
     config.columns[:description].form_ui= :text_editor
     config.columns[:updated_at].label = "Last modified"
     config.show.link.inline = false

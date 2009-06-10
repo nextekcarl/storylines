@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :characters, :active_scaffold => true
   map.resources :experiences, :active_scaffold => true
   map.resources :universes, :active_scaffold => true
+  map.resources :organizations, :active_scaffold => true
   map.resources :qualities, :active_scaffold => true
   map.resources :stats, :active_scaffold => true
   map.resources :my_qualities, :active_scaffold => true

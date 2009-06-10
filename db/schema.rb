@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090530234417) do
+ActiveRecord::Schema.define(:version => 20090610055951) do
 
   create_table "characters", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20090530234417) do
   end
 
   add_index "characters_events", ["character_id", "event_id"], :name => "index_characters_events_on_character_id_and_event_id", :unique => true
+
+  create_table "characters_organizations", :id => false, :force => true do |t|
+    t.integer "character_id",    :null => false
+    t.integer "organization_id", :null => false
+  end
+
+  add_index "characters_organizations", ["character_id", "organization_id"], :name => "index_characters_organizations_on_character_id_and_organization_id", :unique => true
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -79,6 +86,30 @@ ActiveRecord::Schema.define(:version => 20090530234417) do
     t.integer  "level"
     t.integer  "stat_id"
     t.integer  "character_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.text     "mission_statement"
+    t.text     "agenda"
+    t.integer  "manpower"
+    t.integer  "specialists"
+    t.integer  "transportation"
+    t.integer  "internal_security"
+    t.integer  "firepower"
+    t.integer  "knowledge"
+    t.integer  "publicity"
+    t.integer  "public_relations"
+    t.integer  "intrusion"
+    t.integer  "slush_funds"
+    t.integer  "bases"
+    t.integer  "bureaucracy"
+    t.integer  "universe_id"
+    t.integer  "created_by"
+    t.integer  "modified_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

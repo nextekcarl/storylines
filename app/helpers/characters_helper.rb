@@ -27,4 +27,12 @@ module CharactersHelper
       'none yet'
     end
   end
+
+  def options_for_association_conditions(association)
+    if association.name == :organizations
+      ['organizations.universe_id = ?', current_user.current_universe_id]
+    else
+      super
+    end
+  end
 end
