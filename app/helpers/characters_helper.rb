@@ -12,6 +12,20 @@ module CharactersHelper
     record.history.to_s
   end
 
+  def organizations_show_column(record)
+    if record.organizations.size > 0
+      orgs = "<ul>"
+      for org in record.organizations
+        orgs += "<li>"
+        orgs += link_to "#{org.name}", :controller => 'organizations', :action => 'show', :id => org
+        orgs += "</li>"
+      end
+      orgs +="</ul>"
+    else
+      "-"
+    end
+  end
+
   def my_stats_column(record)
     unless record.my_stats.blank?
       textilize(record.my_stats.collect{|mystat| '|' + h(mystat.stat.name) + '|' + image_tag("stat_#{mystat.level}.png") + '|'}.join("\n"))
