@@ -6,4 +6,12 @@ module ExperiencesHelper
   def description_show_column(record)
     record.description.to_s
   end
+
+  def options_for_association_conditions(association)
+    if association.name == :events
+      ['events.universe_id = ?', current_user.current_universe_id]
+    else
+      super
+    end
+  end
 end
