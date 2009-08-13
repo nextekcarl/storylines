@@ -8,7 +8,7 @@ module ExperiencesHelper
   end
 
   def options_for_association_conditions(association)
-    if association.name == :events
+    if association.name == :event
       ['events.universe_id = ?', current_user.current_universe_id]
     else
       super
