@@ -105,6 +105,8 @@ module ActiveScaffold
         js = javascript_include_tag(*active_scaffold_javascripts(frontend).push(options))
 
         css = stylesheet_link_tag(*active_scaffold_stylesheets(frontend).push(options))
+        options[:cache] += '_ie' if options[:cache].is_a? String
+        options[:concat] += '_ie' if options[:concat].is_a? String
         ie_css = stylesheet_link_tag(*active_scaffold_ie_stylesheets(frontend).push(options))
 
         js + "\n" + css + "\n<!--[if IE]>" + ie_css + "<![endif]-->\n"
@@ -183,8 +185,7 @@ module ActiveScaffold
       def column_empty?(column_value)
         empty = column_value.nil?
         empty ||= column_value.empty? if column_value.respond_to? :empty?
-        empty ||= (column_value == '&nbsp;')
-        empty ||= (column_value == active_scaffold_config.list.empty_field_text)
+        empty ||= ['&nbsp;', active_scaffold_config.list.empty_field_text].include? column_value if String === column_value
         return empty
       end
 
